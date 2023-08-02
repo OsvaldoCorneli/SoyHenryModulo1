@@ -33,7 +33,7 @@ console.log(bar); //imprime no definido porque bar esta declarado abajo y el con
 console.log(baz); // imprime error porque la variable esta declarado abajo
 foo();
 function foo() {
-   console.log('Hola!');// imprime Hola!.
+   console.log('Hola!');// imprime Hola!. porque las funciones declaras hacen hoisting
 }
 var bar = 1;
 baz = 2;
@@ -85,18 +85,18 @@ console.log(pm);// Imprime Franco porque el bloque if no lo modifico
 "4px" - 2 //El resultado daria error
 7 / 0 // El resultado sería Infinity, ya que en en JavaScript, dividir cualquier número por 0 da eso
 {}[0] //resultado undefined
-parseInt("09") //Resultado 9
-(5 && 2) //Resultado 2 
+parseInt("09") //Resultado 9 (Conversion)
+5 && 2 //Resultado 2 
 2 && 5 //resultado 5
 5 || 0 //resultado 5
 
-0 || 5 // El resultado es 5. La expresión 0 || 5 se evalúa de izquierda a derecha y devuelve el valor del primer operando evaluado que se evalúa como verdadero, en este caso, 5.
+0 || 5 // El resultado es 5. La expresión 0 || 5 se evalúa de izquierda a derecha y devuelve el valor del primer operando evaluado que se evalúa como verdadero, en este caso, 5. 0 es falso.
 
 [3]+[3]-[10] //Resultado es -1 (El resultado es false. En este caso, la expresión 3>2 se evalúa como true y luego se compara true>1, que se evalúa como false. Por lo tanto, el resultado final es false. corregido chat GPT)
 
-3>2>1 //Resultado es true
+3>2>1 //Resultado es false porque 3>2 es true y despues true > 1 es false.
 
-[] == ![] //Resultado true
+[] == ![] //Resultado true (![] es igual a tener False)
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -132,7 +132,7 @@ function getFood(food) {
    return snack;
 }
 
-getFood(false); //Aqui Retorna "Meow Mix" ya que no entra por el condicional If entonces no se cumple la nueva asignacion a la variable Snack
+getFood(false); //undefined porque no ingresa al if y snack no esta definido en la funcion.
 ```
 
 ### This
@@ -158,10 +158,10 @@ console.log(obj.prop.getFullname()); //Imprime Natalia Nerea ya que en el this a
 //en el contexto de ese objeto. Por lo tanto, this.fullname dentro del método getFullname() 
 //apunta a "Aurelio De Rosa". Por lo tanto, el resultado de la primera llamada es "Aurelio 
 //De Rosa".Se llama a obj.prop.getFullname(). Dentro del método getFullname(), 
-// el this se refiere al objeto prop, ya que el método se está ejecutando en el contexto de ese o
-// bjeto. Por lo tanto, this.fullname dentro del método getFullname() apunta a 
+// el this se refiere al objeto prop, ya que el método se está ejecutando en el contexto de ese
+// objeto. Por lo tanto, this.fullname dentro del método getFullname() apunta a 
 // "Aurelio De Rosa". Por lo tanto, el resultado de la primera llamada es "Aurelio De Rosa".
-var test = obj.prop.getFullname;
+var test = obj.prop.getFullname; 
 
 console.log(test()); //Imprime Aurelio de Rosa ya que utiliza el fullname declarado en la propiedad de prop
 // Se llama a test(). En este caso, la función se invoca sin un contexto específico 
