@@ -14,10 +14,9 @@ const otroContador = counter()
 otroContador()      // 1
 otroContador()      // 2 */
 function counter() {
-  let contador = 0;
+  let contador = 1;
   return function contar(){
-    contador++;
-    return contador;
+    return contador++;
   }
 }
 
