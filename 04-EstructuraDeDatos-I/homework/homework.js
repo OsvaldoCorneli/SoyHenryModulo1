@@ -32,10 +32,10 @@ function nFactorial(n) {
 }
 
 function nFibonacci(n) {
-  if(n === 0 || n < 0){
+  if(n === 0 || n < 0){  //Caso base
     return 0;
   }
-  else if(n === 1){
+  else if(n === 1){   //Case base, necesitamos dos porque es funcion con doble recursividad.
     return 1;
   }
 

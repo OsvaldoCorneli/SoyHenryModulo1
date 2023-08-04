@@ -7,12 +7,96 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   - search: recibe un parámetro y lo busca dentro de la lista, con una particularidad: el parámetro puede ser un valor o un callback. En el primer caso, buscamos un nodo cuyo valor coincida con lo buscado; en el segundo, buscamos un nodo cuyo valor, al ser pasado como parámetro del callback, retorne true. 
   EJEMPLO 
   search(3) busca un nodo cuyo valor sea 3;
-  search(isEven), donde isEven es una función que retorna true cuando recibe por parámetro un número par, busca un nodo cuyo valor sea un número par.
+  search(isEven), donde isEven es una función que retorna true cuando recibe por parámetro un número par, 
+  busca un nodo cuyo valor sea un número par.
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
-function LinkedList() {}
+function LinkedList() {
+  this.head = null;
+  this._length = 0;
+}
 
-function Node(value) {}
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
+
+LinkedList.prototype.add = function (value){
+  let nodo1 = new Node(value)
+  let actual = this.head;
+  if(actual === null){
+    this.head = nodo1;
+  }else{
+  while(actual.next){
+    actual = actual.next;
+  }
+  actual.next = nodo1
+}
+  this._length++;
+
+}
+
+LinkedList.prototype.remove = function(){ //Elimina el ultimo valor, no necesita parametro.
+  let nodo1 = this.head;
+  let prev = null;
+  if(!nodo1){
+    return null;
+  }else{
+while(nodo1.next != null){
+  prev = nodo1
+  nodo1 = nodo1.next;
+  }
+  let resultado = nodo1.value;
+    if(prev != null){ 
+    prev.next = null;}
+    else{
+      this.head = null;
+    }
+     return resultado;
+
+  }
+  
+}
+
+LinkedList.prototype.search = function (isEven){
+  let nodo1 = this.head;
+  if(typeof isEven === "function" ){
+    
+    while(nodo1){
+      if(isEven(nodo1.value)){
+        return nodo1.value;
+       }
+        nodo1 = nodo1.next;
+        
+
+        
+    }
+    return null;
+  
+  }else{
+   
+    while(nodo1){
+       
+        if(nodo1.value === isEven){
+         return nodo1.value;
+        }
+         
+        nodo1 = nodo1.next;
+        
+      }
+
+      return null;
+
+  }
+
+}
+
+function isEven(num){
+   return num % 2 === 0;
+}
+
+
 
 /* EJERCICIO 2
 Implementar la clase HashTable.
