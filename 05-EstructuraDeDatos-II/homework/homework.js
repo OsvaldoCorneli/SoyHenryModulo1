@@ -3,11 +3,16 @@
 /* EJERCICIO 1
 Implementar la clase LinkedList, definiendo los siguientes métodos:
   - add: agrega un nuevo nodo al final de la lista;
-  - remove: elimina el último nodo de la lista y retorna su valor (tener en cuenta el caso particular de una lista de un solo nodo y de una lista vacía);
-  - search: recibe un parámetro y lo busca dentro de la lista, con una particularidad: el parámetro puede ser un valor o un callback. En el primer caso, buscamos un nodo cuyo valor coincida con lo buscado; en el segundo, buscamos un nodo cuyo valor, al ser pasado como parámetro del callback, retorne true. 
+  - remove: elimina el último nodo de la lista y retorna su valor 
+  (tener en cuenta el caso particular de una lista de un solo nodo y de una lista vacía);
+  - search: recibe un parámetro y lo busca dentro de la lista, con una particularidad:
+   el parámetro puede ser un valor o un callback. En el primer caso, buscamos un nodo cuyo
+    valor coincida con lo buscado; en el segundo, buscamos un nodo cuyo valor, al ser pasado
+     como parámetro del callback, retorne true. 
   EJEMPLO 
   search(3) busca un nodo cuyo valor sea 3;
-  search(isEven), donde isEven es una función que retorna true cuando recibe por parámetro un número par, 
+  search(isEven), donde isEven es una función que retorna true cuando recibe por 
+  parámetro un número par, 
   busca un nodo cuyo valor sea un número par.
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
@@ -37,6 +42,7 @@ LinkedList.prototype.add = function (value){
 
 }
 
+
 LinkedList.prototype.remove = function(){ //Elimina el ultimo valor, no necesita parametro.
   let nodo1 = this.head;
   let prev = null;
@@ -58,6 +64,10 @@ while(nodo1.next != null){
   }
   
 }
+ 
+
+
+
 
 LinkedList.prototype.search = function (isEven){
   let nodo1 = this.head;
@@ -68,10 +78,7 @@ LinkedList.prototype.search = function (isEven){
         return nodo1.value;
        }
         nodo1 = nodo1.next;
-        
-
-        
-    }
+        }
     return null;
   
   }else{
@@ -140,33 +147,75 @@ HashTable.prototype.hash = function(input){
   let valorBase =  _charCodeAt(input)
   let modulo = valorBase % this.numBuckets;
   return modulo;
-  
 }
-
 
 HashTable.prototype.set = function(pass, value){
   // - set: recibe el conjunto clave valor (como dos parámetros distintos), hashea
   //  la clave invocando al método hash, y almacena todo el conjunto en el bucket correcto.
   let hash = this.hash(pass);
-  let objeto = {};
-  objeto[pass] = value;
-  this.buckets.splice(hash,0,value);
-
-}
+  let objeto1 = this.buckets;
+  let propiedad = pass;
+  let index = this.buckets.length;
+  if(typeof pass === "string" ){
+      let hash = this.hash(pass);
+      if (index === 0){
+          let objeto = {};
+          objeto[pass] = value;
+          this.buckets.splice(hash, 0, objeto);
+        }
+        
+        else{ let buspropi = existePropiedad(objeto1,propiedad);
+              if(typeof buspropi === 'number'){
+                objeto1[buspropi][propiedad] = value;
+              }else{
+          
+         let objeto = {}
+         objeto[pass] = value;
+         this.buckets.splice(hash, 0, objeto);
+        }}
+  }
+   else { throw new TypeError('Keys must be strings');}
+        
+      }
+   
 
 HashTable.prototype.get = function(clave){
   // - get: recibe una clave por parámetro, y busca el valor que le corresponde en
   //  el bucket correcto de la tabla.
+  console.log(this.buckets);
+    const propiedad = clave;
+    const index1 = this.buckets.length;
+    let i = 0;
+    let verdad = false;
+    console.log(i);
+    while(!this.buckets[i][propiedad]){
+        console.log(this.buckets[i])
+        console.log(propiedad);
+        i++;
+   }
+     if(i != index1){
+        let valor = this.buckets[i][propiedad];
+        return valor;
+     }
+     }
+
+HashTable.prototype.hasKey = function(clave){
+  // - hasKey: recibe una clave por parámetro y consulta si ya hay algo almacenado 
+  // en la tabla con esa clave (retorna un booleano).
+ let pass = clave;
+ let objeto = this.buckets;
+
+ for (let i = 0; i < objeto.length; i++) {
+  if (objeto[i].hasOwnProperty(pass)) {
+    return true;
+  }
+}
+return false;
+}
+
  
-  const valor = this.buckets.find((pass) => pass.clave === clave);
-  
-  return valor;
+   
 
-}
-
-HashTable.prototype.hasKey = function(){
-
-}
 
 
 function _charCodeAt(str){
@@ -179,6 +228,16 @@ function _charCodeAt(str){
   return resultado;
 
 }
+
+function existePropiedad(arrayDeObjetos, propiedadBuscada) {
+  for (let i = 0; i < arrayDeObjetos.length; i++) {
+    if (arrayDeObjetos[i].hasOwnProperty(propiedadBuscada)) {
+      return i;
+    }
+  }
+  return false;
+}
+
 
 
 // No modifiquen nada debajo de esta linea
