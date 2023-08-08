@@ -99,9 +99,7 @@ LinkedList.prototype.search = function (isEven){
 
 }
 
-function isEven(num){
-   return num % 2 === 0;
-}
+
 
 
 
@@ -182,7 +180,7 @@ HashTable.prototype.set = function(pass, value){
 HashTable.prototype.get = function(clave){
   // - get: recibe una clave por parámetro, y busca el valor que le corresponde en
   //  el bucket correcto de la tabla.
-  console.log(this.buckets);
+  console.log(this.buckets);   
     const propiedad = clave;
     const index1 = this.buckets.length;
     let i = 0;
