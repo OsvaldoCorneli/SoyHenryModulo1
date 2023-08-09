@@ -81,6 +81,12 @@ return false;
 
  }
  BinarySearchTree.prototype.depthFirstForEach = function(){
+  // - depthFirstForEach: recorre el árbol siguiendo el orden depth first (DFS) en 
+  // cualquiera de sus variantes, según se indique por parámetro 
+  // ("post-order", "pre-order", o "in-order"). Nota: si no se provee ningún parámetro,
+  //  hará el recorrido "in-order" por defecto.
+ 
+
 
  }
 
